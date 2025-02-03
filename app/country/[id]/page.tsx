@@ -1,13 +1,48 @@
+'use client';
+
 import Image from 'next/image';
 import Link from 'next/link';
+import { useParams } from 'next/navigation';
+import { useEffect, useState } from 'react';
+import { countriesApi } from '../../services';
 
-type Props = {
-	params: Promise<{ id: string }>;
-};
-
-export default async function Country({ params }: Props) {
-	const id = (await params).id;
+export default function Country() {
 	const name = 'Brazil';
+	const params = useParams();
+
+	const [id, setId] = useState<string | null>(null);
+	const [country, setCountry] = useState<Country>();
+	const [loading, setLoading] = useState(true);
+	const [error, setError] = useState<string | null>(null);
+
+	useEffect(() => {
+		if (params?.id && params.id !== id) {
+			setId(params.id as string);
+		}
+	}, [params, id]);
+
+	useEffect(() => {
+		const fetchCountries = async () => {
+			const [response, error] = await countriesApi.getCountry(id);
+			setLoading(false);
+
+			if (error) {
+				setError(error);
+				return;
+			}
+
+			setCountry(response);
+		};
+
+		if (id) {
+			fetchCountries();
+		}
+	}, [id]);
+
+	if (loading) return <div>Loading...</div>;
+	if (error) return <div>(error)</div>;
+
+	console.log(country);
 
 	return (
 		<>
@@ -18,8 +53,8 @@ export default async function Country({ params }: Props) {
 					</button>
 				</Link>
 			</div>
-			<div className='grid grid-cols-1 md:grid-cols-[auto_1fr] gap-4'>
-				<div className='w-full md:max-w-[400px]'>
+			<div className="grid grid-cols-1 md:grid-cols-[auto_1fr] gap-4">
+				<div className="w-full md:max-w-[400px]">
 					<Image
 						src={'/placeholder.svg'}
 						alt={`Flag of ${name}`}

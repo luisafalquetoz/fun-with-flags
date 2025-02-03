@@ -9,12 +9,19 @@ type CardProps = {
 	population: number;
 };
 
-const Card = ({ index, flag, name, capital, region, population }: CardProps) => {
+const Card = ({
+	index,
+	flag,
+	name,
+	capital,
+	region,
+	population,
+}: CardProps) => {
 	return (
 		<div className="h-full overflow-hidden bg-white rounded-lg shadow-lg">
 			<div className="aspect-video w-full">
 				<Image
-					src={flag || 'https://placehold.co/600x400'}
+					src={flag || '/placeholder.svg'}
 					alt={`Flag of ${name}`}
 					className="w-full h-full object-cover"
 					width={500}

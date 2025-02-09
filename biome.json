@@ -21,6 +21,9 @@
 		"rules": {
 			"a11y": {
 				"useButtonType": "off"
+			},
+			"style": {
+				"useExponentiationOperator": "off"
 			}
 		}
 	},

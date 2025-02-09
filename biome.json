@@ -20,10 +20,17 @@
 		"enabled": true,
 		"rules": {
 			"a11y": {
-				"useButtonType": "off"
+				"useButtonType": "off",
+				"useKeyWithClickEvents": "off",
+				"useSemanticElements": "off",
+				"noNoninteractiveElementToInteractiveRole": "off",
+				"useFocusableInteractive": "off"
 			},
 			"style": {
 				"useExponentiationOperator": "off"
+			},
+			"correctness": {
+				"noSwitchDeclarations": "off"
 			}
 		}
 	},

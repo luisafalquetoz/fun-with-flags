@@ -1,9 +1,9 @@
 'use client';
 
+import { Card, Error, Grid, Loading, Search, Select } from '@/components';
+import { countriesApi } from '@/services';
 import Link from 'next/link';
 import { useEffect, useState } from 'react';
-import { Card, Grid, Loading, Search, Select, Error } from './components';
-import { countriesApi } from './services';
 
 type Country = {
 	cca3: string;

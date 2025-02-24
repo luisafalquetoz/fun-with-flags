@@ -1,12 +1,12 @@
 'use client';
 
+import { Error, Loading } from '@/components';
+import { countriesApi } from '@/services';
+import { formatPopulation } from '@/utils';
 import Image from 'next/image';
 import Link from 'next/link';
 import { useParams } from 'next/navigation';
 import { useEffect, useState } from 'react';
-import { countriesApi } from '../../services';
-import { formatPopulation } from '../../utils';
-import { Loading, Error } from '../../components';
 
 type DetailedCountry = {
 	cca3: string;
@@ -58,7 +58,7 @@ export default function Country() {
 		}
 	}, [id]);
 
-	if (loading) return <Loading text='Visiting country...' />;
+	if (loading) return <Loading text="Visiting country..." />;
 	if (error) return <Error text={error} />;
 
 	const {
@@ -108,8 +108,9 @@ export default function Country() {
 						{countryName} ({id})
 					</h2>
 					<div className="space-y-2">
-					<div>
-							<span className="font-semibold">Official Name: </span> {officialName}
+						<div>
+							<span className="font-semibold">Official Name: </span>{' '}
+							{officialName}
 						</div>
 						<div>
 							<span className="font-semibold">Capital: </span> {capitalName}
@@ -118,7 +119,8 @@ export default function Country() {
 							<span className="font-semibold">Region: </span> {region}
 						</div>
 						<div>
-							<span className="font-semibold">Population: </span> {formatPopulation(population)}
+							<span className="font-semibold">Population: </span>{' '}
+							{formatPopulation(population)}
 						</div>
 						<div>
 							<span className="font-semibold">Languages: </span>{' '}

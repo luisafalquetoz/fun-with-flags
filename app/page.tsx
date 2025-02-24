@@ -2,7 +2,7 @@
 
 import Link from 'next/link';
 import { useEffect, useState } from 'react';
-import { Card, Grid, Search, Select } from './components';
+import { Card, Grid, Loading, Search, Select, Error } from './components';
 import { countriesApi } from './services';
 
 type Country = {
@@ -41,10 +41,13 @@ export default function Home() {
 		fetchCountries();
 	}, []);
 
-	if (loading) return <div>Loading...</div>;
-	if (error) return <div>(error)</div>;
+	if (loading) return <Loading text="Discovering countries..." />;
+	if (error) return <Error text={error} />;
 
-	const regions = ['All regions', ...new Set(countries.map(({ region }) => region))];
+	const regions = [
+		'All regions',
+		...new Set(countries.map(({ region }) => region)),
+	];
 
 	const sortedCountries = countries.sort((a, b) =>
 		a.name.common.localeCompare(b.name.common, 'en-US'),
